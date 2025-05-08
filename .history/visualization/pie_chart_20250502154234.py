@@ -1,24 +1,28 @@
 from utils.common import logger
+
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 
-def load_cluster_plot_data(file_path):
-    df = pd.read_csv(file_path)
-    return df['min_cluster_size'], df['coherence_score']
+df = pd.read_csv('data/plot.csv')
 
-def plot_coherence_score(min_cluster_size, coherence_score, output_file):
-    plt.figure(figsize=(10, 6))
-    plt.plot(min_cluster_size, coherence_score, marker='o', linestyle='-', color='b')
-    plt.title('Coherence Score vs. Min Cluster Size')
-    plt.xlabel('Min Cluster Size')
-    plt.ylabel('Coherence Score')
-    plt.grid(True)
-    plt.savefig(output_file)
-    plt.close()
-    logger.info(f"Coherence plot saved to {output_file}")
+# min_cluster_size = df['min_cluster_size']
+# coherence_score = df['coherence_score']
 
-def get_pie_chart_data():
+plt.figure(figsize=(10, 6))
+plt.plot(min_cluster_size, coherence_score, marker='o', linestyle='-', color='b')
+
+plt.title('Coherence Score vs. Min Cluster Size')
+plt.xlabel('Min Cluster Size')
+plt.ylabel('Coherence Score')
+
+plt.grid(True)
+
+plt.savefig('coherence_score_vs_min_cluster_size.png')
+
+def main():
+    import matplotlib.pyplot as plt
+    import numpy as np
+
     labels = [
         ['Ruby Array and Hash Operations', 'Regular Expressions in Ruby', 'Algorithm Design in Ruby', 'Advanced Ruby Methods and Metaprogramming', 
          'File Handling and External Integrations', 'Spreadsheet and CSV Management', 'JSON and Data Serialization', 
@@ -53,64 +57,78 @@ def get_pie_chart_data():
         
         [11.22, 19.71, 15.62, 27.55, 23.28, 2.59]
     ]
-    return labels, sizes
 
-def get_colors(sizes):
-    norm = plt.Normalize(vmin=min(sizes), vmax=max(sizes))
-    cmap = plt.get_cmap('GnBu')
-    return [cmap(norm(size)) for size in sizes]
+    def get_colors(sizes):
+        norm = plt.Normalize(vmin=min(sizes), vmax=max(sizes))
+        cmap = plt.get_cmap('GnBu')
+        return [cmap(norm(size)) for size in sizes]
 
-def plot_nested_pie_chart(labels, sizes, output_file):
     outer_colors = get_colors(sizes[0])
     middle_colors = get_colors(sizes[1])
     inner_colors = get_colors(sizes[2])
 
     fig, ax = plt.subplots(figsize=(12, 12))
-    radius_levels = [1.3, 1.0, 0.7]
-    widths = 0.3
 
-    # Outer
-    wedges, _ = ax.pie(sizes[0], labels=['']*len(labels[0]), radius=radius_levels[0], colors=outer_colors,
-                       wedgeprops=dict(width=widths, edgecolor='w'))
+    wedges, _ = ax.pie(sizes[0], labels=[''] * len(labels[0]), radius=1.3, colors=outer_colors,
+                       wedgeprops=dict(width=0.3, edgecolor='w'))
+
     for i, wedge in enumerate(wedges):
         angle = (wedge.theta2 + wedge.theta1) / 2.0
-        x, y = radius_levels[0] * np.cos(np.radians(angle)), radius_levels[0] * np.sin(np.radians(angle))
-        line_x, line_y = 1.5 * np.cos(np.radians(angle)), 1.5 * np.sin(np.radians(angle))
+        x = 1.3 * np.cos(np.radians(angle))
+        y = 1.3 * np.sin(np.radians(angle))
+        
+        line_x = 1.5 * np.cos(np.radians(angle))
+        line_y = 1.5 * np.sin(np.radians(angle))
+        
         ha = 'left' if x > 0 else 'right'
-        ax.plot([x, line_x], [y, line_y], color='black', linewidth=0.8)
-        ax.text(line_x, line_y, f"{labels[0][i]} ({sizes[0][i]}%)", ha=ha, va='center', fontsize=7)
+        
+        ax.plot([x, line_x], [y, line_y], color='black', linestyle='-', linewidth=0.8)
+        
+        label = f"{labels[0][i]} ({sizes[0][i]}%)" 
+        ax.text(line_x, line_y, label, ha=ha, va='center', fontsize=7)
 
-    # Middle
-    wedges_middle, _ = ax.pie(sizes[1], labels=['']*len(labels[1]), radius=radius_levels[1], colors=middle_colors,
-                              wedgeprops=dict(width=widths, edgecolor='w'))
+    wedges_middle, _ = ax.pie(sizes[1], labels=[''] * len(labels[1]), radius=1.0, colors=middle_colors,
+                              wedgeprops=dict(width=0.3, edgecolor='w'))
+
     for i, wedge in enumerate(wedges_middle):
         angle = (wedge.theta2 + wedge.theta1) / 2.0
-        x, y = 0.85 * np.cos(np.radians(angle)), 0.85 * np.sin(np.radians(angle))
+        x = 0.85 * np.cos(np.radians(angle))
+        y = 0.85 * np.sin(np.radians(angle))
+        
+        rotation = angle if -90 < angle < 90 else angle + 180
+        
         label = f"{labels[1][i]}\n({sizes[1][i]}%)"
-        ax.text(x, y, label, ha='center', va='center', fontsize=7, rotation=angle if -90 < angle < 90 else angle + 180)
+        if len(label) > 30:  
+            if label.count(' ') >= 2:  
+                label = label.replace(' ', '\n', 2)
+                label = label.replace('\n', ' ', 1) 
+        ax.text(x, y, label, ha='center', va='center', fontsize=7, rotation=rotation)
 
-    # Inner
-    wedges_inner, _ = ax.pie(sizes[2], labels=['']*len(labels[2]), radius=radius_levels[2], colors=inner_colors,
-                             wedgeprops=dict(width=widths, edgecolor='w'))
+    wedges_inner, _ = ax.pie(sizes[2], labels=[''] * len(labels[2]), radius=0.7, colors=inner_colors,
+                             wedgeprops=dict(width=0.3, edgecolor='w'))
+
     for i, wedge in enumerate(wedges_inner):
         angle = (wedge.theta2 + wedge.theta1) / 2.0
-        x, y = 0.54 * np.cos(np.radians(angle)), 0.54 * np.sin(np.radians(angle))
+        x = 0.54 * np.cos(np.radians(angle))
+        y = 0.54 * np.sin(np.radians(angle))
+
+        rotation = angle if -90 < angle < 90 else angle + 180
+
+        logger.info(angle)
+        
         label = f"{labels[2][i]}\n({sizes[2][i]}%)"
-        ax.text(x, y, label, ha='center', va='center', fontsize=7, rotation=angle if -90 < angle < 90 else angle + 180)
+        logger.info(label, rotation)
+        if len(label) > 30:  
+            if label.count(' ') >= 2:  
+                label = label.replace(' ', '\n', 2)
+                label = label.replace('\n', ' ', 1)
+      
+        ax.text(x, y, label, ha='center', va='center', fontsize=7, rotation=rotation)
 
-    ax.set(aspect='equal')
-    plt.savefig(output_file)
-    plt.close()
-    logger.info(f"Pie chart saved to {output_file}")
+    ax.set(aspect="equal")
 
-def main():
-    # Part 1: Plot coherence score
-    min_cluster_size, coherence_score = load_cluster_plot_data('data/plot.csv')
-    plot_coherence_score(min_cluster_size, coherence_score, 'coherence_score_vs_min_cluster_size.png')
-
-    # Part 2: Plot nested pie chart
-    labels, sizes = get_pie_chart_data()
-    plot_nested_pie_chart(labels, sizes, 'pie_chart_without_labels.pdf')
+    plt.savefig('pie_chart_without_labels.pdf')
+    plt.show()
 
 if __name__ == '__main__':
     main()

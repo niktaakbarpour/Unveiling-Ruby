@@ -82,7 +82,7 @@ def main():
     columns = ['Q12_{}'.format(i) for i in range(1, 36)]
     descriptions = df.iloc[0, 72:107].tolist()
 
-    # Prepare data for the violin plot
+    Prepare data for the violin plot
     violin_data = []
 
     # Clean and gather response data
