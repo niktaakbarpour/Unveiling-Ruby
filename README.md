@@ -123,6 +123,22 @@ Outputs include:
 
 ---
 
+## 🗂️ Download Full Data & Figures
+
+To access full-size datasets, survey data, and all visualizations:
+
+📁 **Google Drive Folder**: [Unveiling Ruby Resources]([https://drive.google.com/drive/folders/YOUR_PUBLIC_LINK_HERE](https://drive.google.com/drive/folders/1UcV6DNYqQRRV-zOFmsLRApazoZG8xrq6?usp=sharing))
+
+**Contents:**
+- Cleaned survey & Stack Overflow datasets
+- All dot charts, line plots, and heatmaps
+- Supplementary figures in PNG and PDF format
+
+> **Note:** These files are large and not hosted directly in this repository due to GitHub's file size limits.
+
+
+---
+
 ## 📄 Citation
 
 If you use this work, please cite our paper:
