@@ -127,7 +127,7 @@ Outputs include:
 
 To access full-size datasets, survey data, and all visualizations:
 
-📁 **Google Drive Folder**: [Unveiling Ruby Resources]([https://drive.google.com/drive/folders/YOUR_PUBLIC_LINK_HERE](https://drive.google.com/drive/folders/1UcV6DNYqQRRV-zOFmsLRApazoZG8xrq6?usp=sharing))
+📁 **Google Drive Folder**: [Unveiling Ruby Resources]([(https://drive.google.com/drive/folders/1UcV6DNYqQRRV-zOFmsLRApazoZG8xrq6?usp=sharing)])
 
 **Contents:**
 - Cleaned survey & Stack Overflow datasets
