@@ -5,7 +5,7 @@ This repository contains code and data for analyzing Ruby-related topics from St
 ---
 ## 📖 Overview
 
-![Pipeline Diagram](images/pipeline.png)
+![Pipeline Diagram](methodology_overview.png)
 
 This project investigates developer challenges with the Ruby programming language by mining Stack Overflow and conducting a complementary developer survey. It applies topic modeling, statistical analysis, and survey alignment to uncover real-world issues and perceptions around Ruby.
 
