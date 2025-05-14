@@ -53,28 +53,15 @@ This project investigates developer challenges with the Ruby programming languag
 ```
 .
 ├── README.md
-├── preprocess.py                         # Cleans and merges textual data into CombinedText
-├── find_best_model.py                    # Trains BERTopic model and evaluates coherence
-├── survey_vs_so_modular.py              # Survey vs Stack Overflow analysis (dot charts, t-tests, correlation)
-├── heatmap_generation.py                # Yearly heatmaps for topic frequencies (3 steps)
-├── line_plot_analysis.py                # Time series analysis and Mann-Kendall trend testing
+├── data_preprocessing/                   # Cleans and merges textual data into CombinedText
+├── analysis/                             # Analysis for results
+├── notebooks/                            # Jupyter Notebooks for BERTopicing
+├── utils/                                # Utils
+├── visualization/                        # Generating charts and plots
 ├── results/
-│   ├── data/
-│   │   ├── final_category.csv           # Main dataset with all topic annotations
-│   │   ├── deduplicated_data.csv        # Raw preprocessed data
-│   │   ├── preprocessed_data.csv        # Fully cleaned CombinedText
-│   │   ├── topic_info1.csv              # Output from topic modeling
-│   │   ├── test.csv                     # Minimal testing data
-│   │   └── *.csv                        # Intermediate result files
-│   ├── model/                           # Saved BERTopic models
-│   ├── line_charts_step1/               # Annual plots for fine-grained topics
-│   ├── line_charts_step1-1/             # Monthly trend microplots
-│   ├── line_charts_step2/               # Annual plots for middle-level topics
-│   ├── line_charts_step3-3/             # Advanced trend plots with Mann-Kendall tests
-│   ├── heatmap_step1/                   # Yearly heatmaps for topics
-│   └── *.png / *.pdf                    # Output figures
-└── survey/
-    └── survey_data.csv                  # Raw survey results (Likert scale)
+│   ├── data/                             # StackOverflow data
+│   ├── model/                            # Yearly heatmaps for topics
+│   └── survey/                           # Raw survey data
 ```
 
 ---
