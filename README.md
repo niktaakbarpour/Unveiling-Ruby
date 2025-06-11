@@ -1,4 +1,4 @@
-# Unveiling Ruby: A Study of Developer Challenges and Topic Trends
+# Unveiling Ruby: Insights from Stack Overflow and Developer Survey
 
 This repository contains code and data for analyzing Ruby-related topics from Stack Overflow and a developer survey. It includes topic modeling, statistical comparisons, survey result processing, and detailed visualizations across different abstraction levels.
 
